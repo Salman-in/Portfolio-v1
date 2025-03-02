@@ -414,9 +414,9 @@
                 {
                     title: "Weather App",
                     description: "A Simple weather App which displays the current weather of the city you search for.",
-                    image: "/images/placeholder.svg",
+                    image: "/images/weatherph.svg",
                     techstack: "React, TypeScript, OpenWeatherMap API, Tailwind CSS",
-                    githubLink: "#",
+                    githubLink: "https://github.com/Salman-in",
                     projectLink: "https://app-weather-101.vercel.app/"
                 },
                 {
@@ -424,7 +424,7 @@
                     description: "Coming sooooon",
                     image: "/images/placeholder.svg",
                     techstack: "React, Node.js, Express, MongoDB",
-                    githubLink: "#",
+                    githubLink: "https://github.com/Salman-in",
                     projectLink: "#"
                 },
                 {
@@ -432,7 +432,7 @@
                     description: "Coming sooooon",
                     image: "/images/placeholder.svg",
                     techstack: "React, Node.js, Express, MongoDB",
-                    githubLink: "#",
+                    githubLink: "https://github.com/Salman-in",
                     projectLink: "#"
                 },
                 {
@@ -440,7 +440,7 @@
                     description: "Coming sooooon",
                     image: "/images/placeholder.svg",
                     techstack: "React, Node.js, Express, MongoDB",
-                    githubLink: "#",
+                    githubLink: "https://github.com/Salman-in",
                     projectLink: "#"
                 },
                 {
@@ -448,7 +448,7 @@
                     description: "Coming sooooon",
                     image: "/images/placeholder.svg",
                     techstack: "React, Node.js, Express, MongoDB",
-                    githubLink: "#",
+                    githubLink: "https://github.com/Salman-in",
                     projectLink: "#"
                 },
             ];
@@ -467,28 +467,20 @@
                 const projectContent = document.createElement('div');
                 projectContent.classList.add('project-content');
                 projectContent.innerHTML = `
-                    <div class="flex justify-between">
-                    <h3>${project.title}</h3>
-                    <div class="project-links">
-                        <a href="${project.githubLink}" target="_blank">
-                            <p>
-                                <a href="https://www.github.com/Salman-in" target="_blank">
-                                <img src="/images/Source.svg" alt="GH" width="20" height="20">
-                                </a>
-                            </p>
-                        </a>
-                        <a href="${project.projectLink}" target="_blank">
-                        <p>
-                            <a href="https://www.github.com/Salman-in" target="_blank">
-                            <img src="/images/ProjectView.svg" alt="GH" width="20" height="20">
-                            </a>
-                        </p>
-                        </a>
-                    </div>
-                     </div>
-                    <p>${project.description}</p>
-                    <p><strong>Tech Stack:</strong> ${project.techstack}</p>
-                `;
+        <div class="flex justify-between">
+            <h3>${project.title}</h3>
+            <div class="project-links">
+                <a href="${project.githubLink}" target="_blank">
+                    <img src="/images/Source.svg" alt="GitHub" width="20" height="20">
+                </a>
+                <a href="${project.projectLink}" target="_blank">
+                    <img src="/images/ProjectView.svg" alt="View Project" width="20" height="20">
+                </a>
+            </div>
+        </div>
+        <p>${project.description}</p>
+        <p><strong>Tech Stack:</strong> ${project.techstack}</p>
+    `;
 
                 projectCard.appendChild(innerContainer);
                 projectCard.appendChild(projectContent);
