@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Salman Najah</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <style>
         :root {
@@ -29,6 +31,7 @@
 
         html {
             scroll-behavior: smooth;
+            scroll-padding-top: 100px;
         }
 
         body {
@@ -41,6 +44,8 @@
             background: var(--bg-gradient-light);
             color: var(--text-color-light);
             transition: background 0.3s ease, color 0.3s ease;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         body.dark-theme {
@@ -53,12 +58,15 @@
             width: 90%;
             margin: 0 auto;
             padding: 120px 20px 0;
+            perspective: 1px;
+            transform-style: preserve-3d;
         }
 
-        h1 {
-            font-size: clamp(2rem, 5vw, 2.5rem);
-            font-weight: 600;
-            margin-bottom: 0.5rem;
+        h1,
+        h2,
+        h3,
+        h4 {
+            text-align: left;
         }
 
         .sub-heading {
@@ -98,16 +106,37 @@
             background: rgba(255, 255, 255, 0.1);
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             z-index: 1000;
+            transition: all 0.3s ease;
+            -webkit-backdrop-filter: blur(10px);
         }
 
         .nav-el {
             margin: 10px;
             text-decoration: none;
             color: inherit;
+            transition: opacity 0.3s ease;
+            position: relative;
         }
 
         .nav-el:hover {
             cursor: pointer;
+            opacity: 0.7;
+        }
+
+        .nav-el::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: currentColor;
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .nav-el:hover::after {
+            transform: scaleX(1);
         }
 
         .rounded-btn {
@@ -153,6 +182,63 @@
         .project-section {
             font-size: clamp(1.5rem, 4vw, 2rem);
             margin: 1rem 0 0;
+        }
+
+        .scroll-indicator {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin: 15px 0;
+            padding: 8px 16px;
+            background: rgba(157, 157, 157, 0.1);
+            border: 1px solid rgba(157, 157, 157, 0.2);
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 500;
+            color: inherit;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+        }
+
+        .scroll-indicator img {
+            height: 16px;
+            width: 16px;
+            opacity: 0.8;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateX(0);
+            }
+
+            40% {
+                transform: translateX(-5px);
+            }
+
+            60% {
+                transform: translateX(5px);
+            }
+        }
+
+        body.dark-theme .scroll-indicator {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .scroll-indicator:hover {
+            background: rgba(157, 157, 157, 0.2);
+            transform: translateY(-2px);
+        }
+
+        body.dark-theme .scroll-indicator:hover {
+            background: rgba(255, 255, 255, 0.1);
         }
 
         footer {
@@ -240,7 +326,7 @@
 
         .contact-icons {
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-start;
             gap: 10px;
         }
 
@@ -269,7 +355,7 @@
 
         @media (max-width: 480px) {
             .container {
-                padding: 100px 0 0 0;
+                padding: 100px 15px 0;
             }
 
             .navbar {
@@ -281,6 +367,17 @@
                 right: 15px;
                 transform: scale(0.9);
             }
+
+            .scrollmenu {
+                grid-auto-columns: calc(100vw - 40px);
+                padding: 1rem 0;
+                margin: 0 -15px;
+            }
+
+            .product-card {
+                width: 100%;
+                margin: 0 auto;
+            }
         }
 
         @media (min-width: 481px) and (max-width: 768px) {
@@ -289,7 +386,8 @@
             }
 
             .scrollmenu {
-                grid-auto-columns: min(500px, 70%);
+                grid-auto-columns: calc(100vw - 60px);
+                margin: 0 -15px;
             }
         }
 
@@ -442,7 +540,6 @@
             }
         }
 
-        /* Fix for AWS and Express icons in dark mode */
         body.dark-theme .skill-item img[alt="AWS"],
         body.dark-theme .skill-item img[alt="Express"] {
             filter: brightness(0) invert(1);
@@ -547,7 +644,6 @@
             }
         }
 
-        /* Profile Section Styles */
         .profile-section {
             display: flex;
             gap: 60px;
@@ -562,7 +658,7 @@
             flex-shrink: 0;
             width: 300px;
             height: 300px;
-            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            border-radius: 70% 30% 30% 70% / 60% 40% 60% 40%;
             overflow: hidden;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -571,7 +667,7 @@
         }
 
         .profile-photo:hover {
-            border-radius: 70% 30% 30% 70% / 60% 40% 60% 40%;
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
         }
 
         .profile-photo img {
@@ -584,6 +680,15 @@
             flex: 1;
             padding-right: 60px;
             padding-top: 20px;
+        }
+
+        .profile-info p {
+            color: #555;
+            margin-top: 0.5rem;
+        }
+
+        body.dark-theme .profile-info p {
+            color: #ccc;
         }
 
         @media (max-width: 768px) {
@@ -607,6 +712,64 @@
                 padding-top: 0;
             }
         }
+
+        @media (max-width: 768px) {
+            h1 {
+                text-align: center;
+                font-size: clamp(1.8rem, 3.5vw, 2.2rem);
+            }
+
+            h2 {
+                text-align: center;
+                font-size: clamp(1.4rem, 3vw, 1.8rem);
+            }
+
+            .designation {
+                text-align: center;
+                display: inline-block;
+                margin: 0.5rem auto 1.5rem;
+                font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+            }
+        }
+
+        h1 {
+            font-size: clamp(2rem, 4vw, 2.5rem);
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .designation {
+            font-size: clamp(0.9rem, 1.5vw, 1rem);
+            font-weight: 500;
+            opacity: 0.8;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.5px;
+            position: relative;
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        body.dark-theme .designation {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        @media (max-width: 768px) {
+            .designation {
+                text-align: center;
+                display: inline-block;
+                margin: 0.5rem auto 1.5rem;
+                font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+            }
+        }
     </style>
 </head>
 
@@ -624,13 +787,18 @@
                 <div class="profile-info">
                     <h1>Salman Najah</h1>
                     <div class="contact-icons">
-                        <h4 class="sub-heading">Developer</h4>
+                        <span class="designation">Developer</span>
                     </div>
-                    <p>I'm an engineering student with a strong interest in web development, always looking for new ways to
-                        build and improve applications. I enjoy working with JavaScript and its frameworks, trying out different
-                        technologies to make apps faster and more efficient. Recently, I've been learning about DevOps to
-                        understand how everything works from coding to deployment. Knowing the full development process excites
-                        me because it helps me create not just functional apps, but also reliable and scalable systems that can
+                    <p>I'm an engineering student with a strong interest in web development, always looking for new ways
+                        to
+                        build and improve applications. I enjoy working with JavaScript and its frameworks, trying out
+                        different
+                        technologies to make apps faster and more efficient. Recently, I've been learning about DevOps
+                        to
+                        understand how everything works from coding to deployment. Knowing the full development process
+                        excites
+                        me because it helps me create not just functional apps, but also reliable and scalable systems
+                        that can
                         grow over time.</p>
                 </div>
             </div>
@@ -639,9 +807,10 @@
         <div>
             <h2 class="project-section" id="project-link">Projects</h2>
             <div style="display: flex; justify-content: center; align-items: center;">
-                <span
-                    style=" border: 2px solid #9d9d9d; border-radius:50px; padding: 0 10px; background-color: #9d9d9d ; opacity: 0.6; font-size: 15px;">Scroll
-                    <img style="height: 20px; width: 20px; padding-top: 10px;" src="/images/Scroll.svg" alt=""></span>
+                <div class="scroll-indicator">
+                    <span>Scroll</span>
+                    <img src="/images/Scroll.svg" alt="Scroll indicator">
+                </div>
             </div>
             <div class="scrollmenu" id="projectsContainer">
                 <!-- Projects will be loaded dynamically here -->
@@ -655,27 +824,33 @@
                     <h3>Frontend</h3>
                     <div class="skills-grid">
                         <div class="skill-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg"
+                                alt="HTML5">
                             <span>HTML5</span>
                         </div>
                         <div class="skill-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg"
+                                alt="CSS3">
                             <span>CSS3</span>
                         </div>
                         <div class="skill-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
+                                alt="JavaScript">
                             <span>JavaScript</span>
                         </div>
                         <div class="skill-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" alt="TypeScript">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg"
+                                alt="TypeScript">
                             <span>TypeScript</span>
                         </div>
                         <div class="skill-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
+                                alt="React">
                             <span>React</span>
                         </div>
                         <div class="skill-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" alt="Next.js">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg"
+                                alt="Next.js">
                             <span>Next.js</span>
                         </div>
                         <div class="skill-item">
@@ -684,32 +859,38 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="skills-category">
                     <h3>Backend</h3>
                     <div class="skills-grid">
                         <div class="skill-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg"
+                                alt="Node.js">
                             <span>Node.js</span>
                         </div>
                         <div class="skill-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" alt="Express">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg"
+                                alt="Express">
                             <span>Express</span>
                         </div>
                         <div class="skill-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="MongoDB">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg"
+                                alt="MongoDB">
                             <span>MongoDB</span>
                         </div>
                         <div class="skill-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg"
+                                alt="PostgreSQL">
                             <span>PostgreSQL</span>
                         </div>
                         <div class="skill-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg" alt="AWS">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg"
+                                alt="AWS">
                             <span>AWS</span>
                         </div>
                         <div class="skill-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/prisma/prisma-original.svg" alt="Prisma">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/prisma/prisma-original.svg"
+                                alt="Prisma">
                             <span>Prisma</span>
                         </div>
                         <div class="skill-item">
@@ -718,16 +899,18 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="skills-category">
                     <h3>Tools</h3>
                     <div class="skills-grid">
                         <div class="skill-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg"
+                                alt="Git">
                             <span>Git</span>
                         </div>
                         <div class="skill-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg"
+                                alt="Docker">
                             <span>Docker</span>
                         </div>
                         <div class="skill-item">
@@ -735,7 +918,8 @@
                             <span>Postman</span>
                         </div>
                         <div class="skill-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/npm/npm-original-wordmark.svg" alt="NPM">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/npm/npm-original-wordmark.svg"
+                                alt="NPM">
                             <span>NPM</span>
                         </div>
                     </div>
@@ -746,7 +930,8 @@
             <div class="footer-container">
                 <div class="footer-section">
                     <h3 class="footer-heading">Salman Najah</h3>
-                    <p class="footer-description">Developer focused on creating efficient and scalable web applications.</p>
+                    <p class="footer-description">Developer focused on creating efficient and scalable web applications.
+                    </p>
                 </div>
                 <div class="footer-section">
                     <h3 class="footer-heading">Links</h3>
@@ -793,11 +978,28 @@
             const body = document.body;
             const logo = document.getElementById('logo');
             const projectsContainer = document.getElementById('projectsContainer');
+            const navLinks = document.querySelectorAll('.nav-el');
 
             if (!themeToggle || !body || !logo || !projectsContainer) {
                 console.error("One or more elements not found.");
                 return;
             }
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = link.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start',
+                            inline: 'nearest'
+                        });
+                    }
+                });
+            });
 
             themeToggle.addEventListener('click', () => {
                 body.classList.toggle('dark-theme');
