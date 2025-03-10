@@ -664,9 +664,16 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             transition: border-radius 0.5s ease;
             margin-right: 20px;
+            -webkit-tap-highlight-color: transparent;
         }
 
-        .profile-photo:hover {
+        @media (hover: hover) {
+            .profile-photo:hover {
+                border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            }
+        }
+
+        .profile-photo.touched {
             border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
         }
 
@@ -979,10 +986,33 @@
             const logo = document.getElementById('logo');
             const projectsContainer = document.getElementById('projectsContainer');
             const navLinks = document.querySelectorAll('.nav-el');
+            const profilePhoto = document.querySelector('.profile-photo');
 
             if (!themeToggle || !body || !logo || !projectsContainer) {
                 console.error("One or more elements not found.");
                 return;
+            }
+
+            if (profilePhoto) {
+                let isTouched = false;
+
+                profilePhoto.addEventListener('touchstart', (e) => {
+                    e.preventDefault();
+                    isTouched = !isTouched;
+                    if (isTouched) {
+                        profilePhoto.classList.add('touched');
+                    } else {
+                        profilePhoto.classList.remove('touched');
+                    }
+                });
+
+                profilePhoto.addEventListener('touchmove', (e) => {
+                    e.preventDefault();
+                });
+
+                profilePhoto.addEventListener('touchend', (e) => {
+                    e.preventDefault();
+                });
             }
 
             navLinks.forEach(link => {
